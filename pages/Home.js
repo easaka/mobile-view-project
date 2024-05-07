@@ -1,31 +1,36 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, View,Image, TouchableOpacity, TextInput, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Image, TouchableOpacity, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
+  const navigation = useNavigation();
+
   // Sample data of images, replace it with your actual data
   const imagesData = [
-    { id: 1, source: require('../assets/home/Rectangle1.png') },
-    { id: 2, source: require('../assets/home/Rectangle1.png') },
-    { id: 3, source: require('../assets/home/Rectangle1.png') },
-    { id: 4, source: require('../assets/home/Rectangle1.png') },
+    { id: 1, source: require('../assets/home/Rectangle1.png'),text:"Everything is Okay" },
+    { id: 2, source: require('../assets/home/Rectangle2.png'),text:"I don't know" },
+    { id: 3, source: require('../assets/home/Rectangle3.png'),text:"Everything is fine" },
+    { id: 4, source: require('../assets/home/Rectangle4.png'),text:"Point of Objection" },
   ];
+
+  const handleTranslatePress = () => {
+    navigation.navigate('Translate'); // Navigate to the Translate screen
+  };
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>Common Sign Language</Text>
       <View style={styles.gridContainer}>
         {imagesData.map(image => (
           <TouchableOpacity key={image.id} style={styles.imageContainer}>
             <Image source={image.source} style={styles.image} resizeMode="cover" />
-            <Text>Everything is Okay</Text>
+            <Text> {image.text}</Text>
           </TouchableOpacity>
         ))}
       </View>
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.input} placeholder="Enter your text here" />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.translateButton} onPress={handleTranslatePress}>
+        <Text style={styles.translateButtonText}>Translate to Word</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -50,26 +55,23 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 10,
   },
-  inputContainer: {
-    marginTop: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-  },
-  button: {
+  translateButton: {
     backgroundColor: 'blue', // Change the button color as needed
-    padding: 10,
+    padding: 15,
     borderRadius: 5,
     alignItems: 'center',
+    marginTop: 20,
   },
-  buttonText: {
+  translateButtonText: {
     color: '#fff', // Change the button text color as needed
     fontWeight: 'bold',
+    fontSize: 18,
   },
+  text:{
+    fontWeight: 'bold',
+    fontSize: 18,
+    margin: 12
+  }
 });
 
 export default Home;

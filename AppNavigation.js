@@ -11,8 +11,8 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name='Home' component={SplashScreen} />
-      <Stack.Screen name="Details" component={HomeScreen} />
+      <Stack.Screen name='Splash' component={SplashScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   );
